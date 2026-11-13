@@ -24,6 +24,7 @@ add_library(daemon_core STATIC
     src/TelemetrySyncClient.cpp
     src/ControlServer.cpp
 )
+
 target_include_directories(daemon_core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
@@ -36,3 +37,10 @@ target_link_libraries(daemon_core PUBLIC
 
 add_executable(peripheral_daemon src/main.cpp)
 target_link_libraries(peripheral_daemon PRIVATE daemon_core)
+
+enable_testing()
+add_executable(unit_tests tests/cpp/test_devices.cpp)
+target_link_libraries(unit_tests PRIVATE daemon_core GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(unit_tests)
