@@ -11,3 +11,13 @@ if(MSVC)
 else()
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
+
+find_package(nlohmann_json REQUIRED)
+find_package(httplib REQUIRED)
+find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
+
+add_library(daemon_core STATIC
+    src/MouseDevice.cpp
+    src/HeadsetDevice.cpp
+)
