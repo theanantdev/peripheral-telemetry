@@ -21,4 +21,18 @@ add_library(daemon_core STATIC
     src/MouseDevice.cpp
     src/HeadsetDevice.cpp
     src/DeviceManager.cpp
+    src/TelemetrySyncClient.cpp
+    src/ControlServer.cpp
 )
+target_include_directories(daemon_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(daemon_core PUBLIC
+    nlohmann_json::nlohmann_json
+    httplib::httplib
+    Threads::Threads
+)
+
+add_executable(peripheral_daemon src/main.cpp)
+target_link_libraries(peripheral_daemon PRIVATE daemon_core)
