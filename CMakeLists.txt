@@ -20,4 +20,5 @@ find_package(Threads REQUIRED)
 add_library(daemon_core STATIC
     src/MouseDevice.cpp
     src/HeadsetDevice.cpp
+    src/DeviceManager.cpp
 )
